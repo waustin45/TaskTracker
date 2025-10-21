@@ -1,12 +1,12 @@
-import { UserButton } from "@clerk/nextjs";
+
+import { Navbar01 } from "../ui/shadcn-io/navbar-01";
 
 export default function Navbar() {
     return (
         <header>
-            <nav className="w-full shadow-sm bg-primary text-primary-foreground flex justify-between items-center px-8 h-16">
-                <h1 className="text-lg font-bold">TaskTracker</h1>
-                <UserButton />
-            </nav>
+            <div className="relative w-full">
+                <Navbar01 />
+            </div>
         </header>
     )
 }
