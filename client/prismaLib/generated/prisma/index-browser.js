@@ -130,6 +130,8 @@ exports.Prisma.DailyTaskScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  CurrentMonth: 'CurrentMonth',
+  CurrentYear: 'CurrentYear',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt',
   userId: 'userId'

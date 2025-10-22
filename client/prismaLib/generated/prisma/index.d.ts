@@ -2073,11 +2073,15 @@ export namespace Prisma {
 
   export type DailyTaskAvgAggregateOutputType = {
     id: number | null
+    CurrentMonth: number | null
+    CurrentYear: number | null
     userId: number | null
   }
 
   export type DailyTaskSumAggregateOutputType = {
     id: number | null
+    CurrentMonth: number | null
+    CurrentYear: number | null
     userId: number | null
   }
 
@@ -2085,6 +2089,8 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
+    CurrentMonth: number | null
+    CurrentYear: number | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
     userId: number | null
@@ -2094,6 +2100,8 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
+    CurrentMonth: number | null
+    CurrentYear: number | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
     userId: number | null
@@ -2103,6 +2111,8 @@ export namespace Prisma {
     id: number
     title: number
     description: number
+    CurrentMonth: number
+    CurrentYear: number
     CreatedAt: number
     UpdatedAt: number
     userId: number
@@ -2112,11 +2122,15 @@ export namespace Prisma {
 
   export type DailyTaskAvgAggregateInputType = {
     id?: true
+    CurrentMonth?: true
+    CurrentYear?: true
     userId?: true
   }
 
   export type DailyTaskSumAggregateInputType = {
     id?: true
+    CurrentMonth?: true
+    CurrentYear?: true
     userId?: true
   }
 
@@ -2124,6 +2138,8 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    CurrentMonth?: true
+    CurrentYear?: true
     CreatedAt?: true
     UpdatedAt?: true
     userId?: true
@@ -2133,6 +2149,8 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    CurrentMonth?: true
+    CurrentYear?: true
     CreatedAt?: true
     UpdatedAt?: true
     userId?: true
@@ -2142,6 +2160,8 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    CurrentMonth?: true
+    CurrentYear?: true
     CreatedAt?: true
     UpdatedAt?: true
     userId?: true
@@ -2238,6 +2258,8 @@ export namespace Prisma {
     id: number
     title: string
     description: string | null
+    CurrentMonth: number
+    CurrentYear: number
     CreatedAt: Date
     UpdatedAt: Date
     userId: number
@@ -2266,6 +2288,8 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    CurrentMonth?: boolean
+    CurrentYear?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     userId?: boolean
@@ -2276,6 +2300,8 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    CurrentMonth?: boolean
+    CurrentYear?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     userId?: boolean
@@ -2286,6 +2312,8 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    CurrentMonth?: boolean
+    CurrentYear?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     userId?: boolean
@@ -2296,12 +2324,14 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    CurrentMonth?: boolean
+    CurrentYear?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     userId?: boolean
   }
 
-  export type DailyTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "CreatedAt" | "UpdatedAt" | "userId", ExtArgs["result"]["dailyTask"]>
+  export type DailyTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "CurrentMonth" | "CurrentYear" | "CreatedAt" | "UpdatedAt" | "userId", ExtArgs["result"]["dailyTask"]>
   export type DailyTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2321,6 +2351,8 @@ export namespace Prisma {
       id: number
       title: string
       description: string | null
+      CurrentMonth: number
+      CurrentYear: number
       CreatedAt: Date
       UpdatedAt: Date
       userId: number
@@ -2751,6 +2783,8 @@ export namespace Prisma {
     readonly id: FieldRef<"DailyTask", 'Int'>
     readonly title: FieldRef<"DailyTask", 'String'>
     readonly description: FieldRef<"DailyTask", 'String'>
+    readonly CurrentMonth: FieldRef<"DailyTask", 'Int'>
+    readonly CurrentYear: FieldRef<"DailyTask", 'Int'>
     readonly CreatedAt: FieldRef<"DailyTask", 'DateTime'>
     readonly UpdatedAt: FieldRef<"DailyTask", 'DateTime'>
     readonly userId: FieldRef<"DailyTask", 'Int'>
@@ -3195,6 +3229,8 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
+    CurrentMonth: 'CurrentMonth',
+    CurrentYear: 'CurrentYear',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt',
     userId: 'userId'
@@ -3345,6 +3381,8 @@ export namespace Prisma {
     id?: IntFilter<"DailyTask"> | number
     title?: StringFilter<"DailyTask"> | string
     description?: StringNullableFilter<"DailyTask"> | string | null
+    CurrentMonth?: IntFilter<"DailyTask"> | number
+    CurrentYear?: IntFilter<"DailyTask"> | number
     CreatedAt?: DateTimeFilter<"DailyTask"> | Date | string
     UpdatedAt?: DateTimeFilter<"DailyTask"> | Date | string
     userId?: IntFilter<"DailyTask"> | number
@@ -3355,6 +3393,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
+    CurrentMonth?: SortOrder
+    CurrentYear?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     userId?: SortOrder
@@ -3368,6 +3408,8 @@ export namespace Prisma {
     NOT?: DailyTaskWhereInput | DailyTaskWhereInput[]
     title?: StringFilter<"DailyTask"> | string
     description?: StringNullableFilter<"DailyTask"> | string | null
+    CurrentMonth?: IntFilter<"DailyTask"> | number
+    CurrentYear?: IntFilter<"DailyTask"> | number
     CreatedAt?: DateTimeFilter<"DailyTask"> | Date | string
     UpdatedAt?: DateTimeFilter<"DailyTask"> | Date | string
     userId?: IntFilter<"DailyTask"> | number
@@ -3378,6 +3420,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
+    CurrentMonth?: SortOrder
+    CurrentYear?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     userId?: SortOrder
@@ -3395,6 +3439,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"DailyTask"> | number
     title?: StringWithAggregatesFilter<"DailyTask"> | string
     description?: StringNullableWithAggregatesFilter<"DailyTask"> | string | null
+    CurrentMonth?: IntWithAggregatesFilter<"DailyTask"> | number
+    CurrentYear?: IntWithAggregatesFilter<"DailyTask"> | number
     CreatedAt?: DateTimeWithAggregatesFilter<"DailyTask"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"DailyTask"> | Date | string
     userId?: IntWithAggregatesFilter<"DailyTask"> | number
@@ -3446,6 +3492,8 @@ export namespace Prisma {
   export type DailyTaskCreateInput = {
     title: string
     description?: string | null
+    CurrentMonth: number
+    CurrentYear: number
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     user: UserCreateNestedOneWithoutTasksInput
@@ -3455,6 +3503,8 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
+    CurrentMonth: number
+    CurrentYear: number
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     userId: number
@@ -3463,6 +3513,8 @@ export namespace Prisma {
   export type DailyTaskUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    CurrentMonth?: IntFieldUpdateOperationsInput | number
+    CurrentYear?: IntFieldUpdateOperationsInput | number
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTasksNestedInput
@@ -3472,6 +3524,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    CurrentMonth?: IntFieldUpdateOperationsInput | number
+    CurrentYear?: IntFieldUpdateOperationsInput | number
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -3481,6 +3535,8 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
+    CurrentMonth: number
+    CurrentYear: number
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     userId: number
@@ -3489,6 +3545,8 @@ export namespace Prisma {
   export type DailyTaskUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    CurrentMonth?: IntFieldUpdateOperationsInput | number
+    CurrentYear?: IntFieldUpdateOperationsInput | number
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3497,6 +3555,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    CurrentMonth?: IntFieldUpdateOperationsInput | number
+    CurrentYear?: IntFieldUpdateOperationsInput | number
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -3656,6 +3716,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    CurrentMonth?: SortOrder
+    CurrentYear?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     userId?: SortOrder
@@ -3663,6 +3725,8 @@ export namespace Prisma {
 
   export type DailyTaskAvgOrderByAggregateInput = {
     id?: SortOrder
+    CurrentMonth?: SortOrder
+    CurrentYear?: SortOrder
     userId?: SortOrder
   }
 
@@ -3670,6 +3734,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    CurrentMonth?: SortOrder
+    CurrentYear?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     userId?: SortOrder
@@ -3679,6 +3745,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    CurrentMonth?: SortOrder
+    CurrentYear?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     userId?: SortOrder
@@ -3686,6 +3754,8 @@ export namespace Prisma {
 
   export type DailyTaskSumOrderByAggregateInput = {
     id?: SortOrder
+    CurrentMonth?: SortOrder
+    CurrentYear?: SortOrder
     userId?: SortOrder
   }
 
@@ -3918,6 +3988,8 @@ export namespace Prisma {
   export type DailyTaskCreateWithoutUserInput = {
     title: string
     description?: string | null
+    CurrentMonth: number
+    CurrentYear: number
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -3926,6 +3998,8 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
+    CurrentMonth: number
+    CurrentYear: number
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -3963,6 +4037,8 @@ export namespace Prisma {
     id?: IntFilter<"DailyTask"> | number
     title?: StringFilter<"DailyTask"> | string
     description?: StringNullableFilter<"DailyTask"> | string | null
+    CurrentMonth?: IntFilter<"DailyTask"> | number
+    CurrentYear?: IntFilter<"DailyTask"> | number
     CreatedAt?: DateTimeFilter<"DailyTask"> | Date | string
     UpdatedAt?: DateTimeFilter<"DailyTask"> | Date | string
     userId?: IntFilter<"DailyTask"> | number
@@ -4010,6 +4086,8 @@ export namespace Prisma {
     id?: number
     title: string
     description?: string | null
+    CurrentMonth: number
+    CurrentYear: number
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -4017,6 +4095,8 @@ export namespace Prisma {
   export type DailyTaskUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    CurrentMonth?: IntFieldUpdateOperationsInput | number
+    CurrentYear?: IntFieldUpdateOperationsInput | number
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4025,6 +4105,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    CurrentMonth?: IntFieldUpdateOperationsInput | number
+    CurrentYear?: IntFieldUpdateOperationsInput | number
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4033,6 +4115,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    CurrentMonth?: IntFieldUpdateOperationsInput | number
+    CurrentYear?: IntFieldUpdateOperationsInput | number
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
