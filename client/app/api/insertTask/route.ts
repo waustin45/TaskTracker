@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
     const data = await request.json();
     const { title, description, currentMonth, currentYear, userId } = data;
-    console.log(`Inserting task for user: ${userId} - Title: ${title}, Description: ${description}, Month: ${currentMonth}, Year: ${currentYear}`);
+    //console.log(`Inserting task for user: ${userId} - Title: ${title}, Description: ${description}, Month: ${currentMonth}, Year: ${currentYear}`);
 
     const insertTask = await prisma.dailyTask.create({
         data: {

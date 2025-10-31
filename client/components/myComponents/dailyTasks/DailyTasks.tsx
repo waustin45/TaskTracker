@@ -8,6 +8,9 @@ import dayjs from "dayjs";
 import { FetchGet } from "@/services/fetchService";
 import { Spinner } from "@/components/ui/spinner";
 import { useUser } from "@clerk/nextjs";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 type DailyTask = {
     id: number;
@@ -62,15 +65,30 @@ const columns: ColumnDef<DailyTask>[] = [
         header: "Description",
     }
 ];
+const months = [
+    { value: 1, label: "January" },
+    { value: 2, label: "February" },
+    { value: 3, label: "March" },
+    { value: 4, label: "April" },
+    { value: 5, label: "May" },
+    { value: 6, label: "June" },
+    { value: 7, label: "July" },
+    { value: 8, label: "August" },
+    { value: 9, label: "September" },
+    { value: 10, label: "October" },
+    { value: 11, label: "November" },
+    { value: 12, label: "December" },
+];
 
 const currMonth = parseInt(dayjs().format('M'))
 const currYear = parseInt(dayjs().format('YYYY'))
+const currDay = parseInt(dayjs().format('D'))
 export default function DailyTasks() {
     const { user } = useUser();
-    console.log(user)
+
     const [currentMonth, setCurrentMonth] = useState<number>(currMonth);
     const [currentYear, setCurrentYear] = useState<number>(currYear);
-    const [tasks, setTasks] = useState<DailyTask[]>([]);
+    const [tasks, setTasks] = useState<DailyTask[] | null>(null);
 
     const fetchTasks = async () => {
         const getFetch: DailyTaskDTO = await FetchGet(`/api/dailyTasks/${user?.id}?month=${currentMonth}&year=${currentYear}`)
@@ -83,22 +101,48 @@ export default function DailyTasks() {
     }
 
     useEffect(() => {
-        fetchTasks();
-        
-    }, [currentMonth, currentYear]);
-    if(!tasks){
+        if (user) {
+            fetchTasks();
+        }
+    }, [currentMonth, currentYear, user]);
+    if (!tasks) {
         return <Spinner />
     }
-    if(tasks.length === 0){
+    if (tasks.length === 0) {
         return <div>No tasks found for {currentMonth}-{currentYear}</div>
     }
 
 
     return (
-        <>
-        {currentMonth}-{currentYear}
-        <DataTable data={tasks} columns={columns} />
-        </>
-        
+
+
+        <div className="flex flex-col gap-3 border shadow-sm p-3 rounded-lg">
+            <div className="flex gap-3 items-center justify-end">
+                <div className="flex gap-1 items-center">
+                    <label className="text-sm font-medium">Today:</label>
+                    <Input type='text' value={`${currMonth}-${currDay}-${currYear}`}  readOnly disabled className="w-[180px]" />
+                </div>
+                
+                <Select onValueChange={(value) => setCurrentMonth(parseInt(value))}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select a month" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectLabel>Months</SelectLabel>
+                            {months.map((month) => (
+                                <SelectItem key={month.value} value={month.value.toString()} >
+                                    {month.label}
+                                </SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+                <Input type="number" value={currentYear} onChange={(e) => setCurrentYear(parseInt(e.target.value))} className="w-[180px]" />
+                <Button type="button" onClick={fetchTasks}>Fetch Tasks</Button>
+            </div>
+            <DataTable data={tasks} columns={columns} />
+        </div>
+
     )
 }

@@ -8,7 +8,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const url = new URL(request.url);
     const month = url.searchParams.get('month');
     const year = url.searchParams.get('year');
-    console.log(userId)
+    console.log(month,year, "month year")
     const user = await checkUser(userId); // Coming from the check user service
 
     if (!user) {
