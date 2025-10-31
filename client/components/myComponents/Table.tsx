@@ -34,12 +34,12 @@ export default function DataTable<TData, TValue>({
   return (
     <div className="overflow-hidden rounded-md border">
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-gray-300">
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <TableRow  key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead className="font-bold text-lg" key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -52,7 +52,7 @@ export default function DataTable<TData, TValue>({
             </TableRow>
           ))}
         </TableHeader>
-        <TableBody>
+        <TableBody className="bg-gray-100">
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
