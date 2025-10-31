@@ -95,7 +95,10 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name'
+  name: 'name',
+  clerkUserId: 'clerkUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.DailyTaskScalarFieldEnum = {
@@ -168,7 +171,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -177,22 +179,15 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../prismaLib/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id    Int         @id @default(autoincrement())\n  email String      @unique\n  name  String?\n  tasks DailyTask[]\n}\n\nmodel DailyTask {\n  id           Int      @id @default(autoincrement())\n  title        String\n  description  String?\n  CurrentMonth Int\n  CurrentYear  Int\n  CreatedAt    DateTime @default(now())\n  UpdatedAt    DateTime @updatedAt\n  user         User     @relation(fields: [userId], references: [id])\n  userId       Int\n}\n",
-  "inlineSchemaHash": "f3d5dfc852e28b3e63a7528d97b7271c7fc7d535ff844043b07c0a91392c056c",
-  "copyEngine": true
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../prismaLib/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          Int         @id @default(autoincrement())\n  email       String      @unique\n  name        String?\n  clerkUserId String?     @unique\n  createdAt   DateTime?   @default(now())\n  updatedAt   DateTime?   @updatedAt\n  tasks       DailyTask[]\n}\n\nmodel DailyTask {\n  id           Int      @id @default(autoincrement())\n  title        String\n  description  String?\n  CurrentMonth Int\n  CurrentYear  Int\n  CreatedAt    DateTime @default(now())\n  UpdatedAt    DateTime @updatedAt\n  user         User     @relation(fields: [userId], references: [id])\n  userId       Int\n}\n",
+  "inlineSchemaHash": "15eb6fb345b3d2cd8cb61ee25873d72d7ee95a7cfd503c6be8e3a3cbd531784b",
+  "copyEngine": false
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tasks\",\"kind\":\"object\",\"type\":\"DailyTask\",\"relationName\":\"DailyTaskToUser\"}],\"dbName\":null},\"DailyTask\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"CurrentMonth\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"CurrentYear\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"CreatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"UpdatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"DailyTaskToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"clerkUserId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"tasks\",\"kind\":\"object\",\"type\":\"DailyTask\",\"relationName\":\"DailyTaskToUser\"}],\"dbName\":null},\"DailyTask\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"CurrentMonth\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"CurrentYear\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"CreatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"UpdatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"DailyTaskToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
-config.engineWasm = {
-  getRuntime: async () => require('./query_engine_bg.js'),
-  getQueryEngineWasmModule: async () => {
-    const loader = (await import('#wasm-engine-loader')).default
-    const engine = (await loader).default
-    return engine
-  }
-}
+config.engineWasm = undefined
 config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({

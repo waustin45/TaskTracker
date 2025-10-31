@@ -8,6 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import dayjs from "dayjs";
 import { FetchPost } from "@/services/fetchService";
+import { useState } from "react";
+import { Spinner } from "@/components/ui/spinner";
+import { PlusIcon } from "lucide-react";
 const formSchema = z.object({
   title: z.string().min(2).max(50),
   description: z.string().min(2).max(200),
@@ -15,6 +18,8 @@ const formSchema = z.object({
 const currentMonth = dayjs(new Date()).format("MMMM")
 const currentYear = dayjs(new Date()).format("YYYY")
 export default function InsertTask() {
+  const [loader, setLoader] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,7 +32,7 @@ export default function InsertTask() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     const { title, description } = values
-
+    setLoader(true);
     const postBody = {
       title: title,
       description: description,
@@ -39,8 +44,12 @@ export default function InsertTask() {
     const post = await FetchPost("/api/insertTask",postBody);
     if (post) {
       console.log("Task inserted successfully:", post);
+      setLoader(false);
+      form.reset();
     } else {
       console.error("Failed to insert task.");
+      setLoader(false);
+      setError("Failed to insert task.");
     }
   }
   return (
@@ -75,7 +84,13 @@ export default function InsertTask() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">Add</Button>
+        {
+          loader ? <Button type="submit" className="w-full" disabled><Spinner /> Inserting Task...</Button> :  <Button type="submit" className="w-full"><PlusIcon /> Add</Button>
+        }
+        
+        {
+          error && <span className="text-error font-bold text-sm">{error}</span>
+        }
       </form>
     </Form>
   )
